@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rock Paper Scissors — Title Slide Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@500;700;800&family=Inter:wght@400;500;600&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #17181a;
+    --card-radius: 6px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 48px 32px 80px;
+    background: var(--page-bg);
+    font-family: 'Inter', sans-serif;
+    color: #e8e8e5;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; }
+  header.page-head {
+    margin-bottom: 48px;
+    text-align: left;
+    border-bottom: 1px solid #35363a;
+    padding-bottom: 28px;
+  }
+  header.page-head h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    margin: 0 0 8px;
+    color: #f4f4f2;
+  }
+  header.page-head p {
+    margin: 0;
+    color: #9a9a97;
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 720px;
+  }
+  section.block { margin-bottom: 56px; }
+  section.block h2 {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b8b8b4;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  section.block > p.block-sub {
+    margin: 0 0 24px;
+    color: #83837f;
+    font-size: 13.5px;
+    line-height: 1.6;
+    max-width: 700px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px;
+  }
+
+  /* ---- SLIDE MOCKUP ---- */
+  .slide-card { display: flex; flex-direction: column; gap: 10px; }
+  .slide {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 7% 8%;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  }
+  .slide.recommended { outline: 2px solid #c9a35c; outline-offset: -2px; }
+  .ribbon {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 100px;
+    background: #c9a35c;
+    color: #1c1c1c;
+    z-index: 3;
+  }
+  .photo-area {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .photo-area .glow {
+    position: absolute;
+    top: 50%; left: 72%;
+    width: 62%; height: 130%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 38%, rgba(255,255,255,0) 70%);
+  }
+  .photo-area .tag {
+    position: absolute;
+    bottom: 6%;
+    right: 5%;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+  }
+  .eyebrow {
+    position: relative; z-index: 2;
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    max-width: 78%;
+  }
+  .title-block { position: relative; z-index: 2; }
+  .subtitle {
+    position: relative; z-index: 2;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .rule {
+    display: inline-block;
+    width: 46px;
+    height: 2px;
+    margin: 14px 0 12px;
+  }
+  .footer-line {
+    position: relative; z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .footer-line .count { text-align: right; }
+  .caption {
+    font-size: 13px;
+    color: #b6b6b2;
+    line-height: 1.55;
+  }
+  .caption b { color: #f0f0ee; font-weight: 600; }
+  .swatches { display: flex; gap: 6px; margin-top: 6px; }
+  .swatch { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.15); }
+
+  /* ---- Palette variables per slide ---- */
+  .bg-base { background: #2b2b2b; }
+  .bg-base .eyebrow, .bg-base .subtitle, .bg-base .footer-line { color: #a8a8a4; }
+  .bg-base .title-block, .bg-base .title-block * { color: #e8e8e5; }
+  .bg-base .rule { background: #6a6a66; }
+
+  .bg-oxblood { background: #262322; }
+  .bg-oxblood .eyebrow { color: #c98d86; }
+  .bg-oxblood .subtitle, .bg-oxblood .footer-line { color: #a8a8a4; }
+  .bg-oxblood .title-block, .bg-oxblood .title-block * { color: #eee7e5; }
+  .bg-oxblood .rule { background: #8f3b35; }
+
+  .bg-brass { background: #24231f; }
+  .bg-brass .eyebrow { color: #d3b479; }
+  .bg-brass .subtitle, .bg-brass .footer-line { color: #a8a6a0; }
+  .bg-brass .title-block, .bg-brass .title-block * { color: #eeeae1; }
+  .bg-brass .rule { background: #b08d57; }
+
+  .bg-steel { background: #202325; }
+  .bg-steel .eyebrow { color: #8fb0c7; }
+  .bg-steel .subtitle, .bg-steel .footer-line { color: #a2a6a8; }
+  .bg-steel .title-block, .bg-steel .title-block * { color: #e6ebee; }
+  .bg-steel .rule { background: #4f7396; }
+
+  /* ---- Typography options ---- */
+  .type-a .title-block { font-family: 'Bebas Neue', sans-serif; font-size: 15.5vw; line-height: 0.92; letter-spacing: 0.01em; }
+  .grid .type-a .title-block { font-size: 44px; }
+
+  .type-b .title-block { font-family: 'Playfair Display', serif; font-weight: 600; font-style: italic; font-size: 36px; line-height: 1.02; }
+  .type-b .eyebrow { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.3em; font-size: 12.5px; }
+
+  .type-c .title-block { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 33px; line-height: 1.08; letter-spacing: -0.01em; }
+  .type-c .eyebrow, .type-c .subtitle, .type-c .footer-line { font-family: 'Montserrat', sans-serif; }
+
+  .type-b .subtitle, .type-b .footer-line { font-family: 'Work Sans', sans-serif; }
+  .type-a .subtitle, .type-a .footer-line, .caption { font-family: 'Inter', sans-serif; }
+
+  footer.page-foot {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #35363a;
+    color: #83837f;
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 760px;
+  }
+  footer.page-foot b { color: #d8d8d4; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <h1>Rock Paper Scissors — Title Slide Concepts</h1>
+    <p>Six quick comps to compare typography and color direction for your capstone title slide, built on your dark‑grey / light‑grey base. The glow in each frame stands in for a high‑key portrait crop — swap it for a real hero shot once you've picked a direction.</p>
+  </header>
+
+  <!-- SECTION A: TYPOGRAPHY -->
+  <section class="block">
+    <h2>1 — Typography Pairings</h2>
+    <p class="block-sub">Same charcoal / light‑grey palette across all three, so you're comparing letterforms only.</p>
+    <div class="grid">
+
+      <div class="slide-card">
+        <div class="slide bg-base type-a">
+          <div class="photo-area"><div class="glow"></div><div class="tag">Photo placeholder</div></div>
+          <div class="eyebrow">Capstone Branding Package</div>
+          <div class="title-block">ROCK<br>PAPER<br>SCISSORS</div>
+          <div class="footer-line">
+            <div>High‑Key Portrait &amp; Lifestyle Photography</div>
+            <div class="count">05 Hero — 09 Headshots — 06 Action</div>
+          </div>
+        </div>
+        <div class="caption"><b>A · Bold &amp; Punchy</b> — Bebas Neue headline, Inter for supporting text. Strong, masculine, very "barbershop sign," reads instantly at any size.</div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide bg-base type-b recommended">
+          <div class="ribbon">Recommended</div>
+          <div class="photo-area"><div class="glow"></div><div class="tag">Photo placeholder</div></div>
+          <div class="eyebrow">Capstone Branding Package</div>
+          <div class="title-block">Rock Paper<br>Scissors</div>
+          <div class="rule"></div>
+          <div class="footer-line">
+            <div>High‑Key Portrait &amp; Lifestyle Photography</div>
+            <div class="count">05 Hero — 09 Headshots — 06 Action</div>
+          </div>
+        </div>
+        <div class="caption"><b>B · Editorial Contrast</b> — Playfair Display italic headline + Bebas Neue eyebrow label + Work Sans body. Reads like a fashion/grooming magazine spread — fits the high‑key look and elevates it past a generic barbershop flyer.</div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide bg-base type-c">
+          <div class="photo-area"><div class="glow"></div><div class="tag">Photo placeholder</div></div>
+          <div class="eyebrow">Capstone Branding Package</div>
+          <div class="title-block">Rock Paper Scissors</div>
+          <div class="footer-line">
+            <div>High‑Key Portrait &amp; Lifestyle Photography</div>
+            <div class="count">05 Hero — 09 Headshots — 06 Action</div>
+          </div>
+        </div>
+        <div class="caption"><b>C · Modern Minimal</b> — Montserrat ExtraBold throughout. Clean and safe, but the least distinctive of the three — could belong to almost any brand.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION B: COLOR -->
+  <section class="block">
+    <h2>2 — Color Palette Options</h2>
+    <p class="block-sub">All four use Option B's typography, so you're comparing color only. Each keeps your charcoal / light‑grey base and adds a single accent color, used sparingly (eyebrow label + rule line), rather than replacing the scheme.</p>
+    <div class="grid">
+
+      <div class="slide-card">
+        <div class="slide bg-base type-b">
+          <div class="photo-area"><div class="glow"></div><div class="tag">Photo placeholder</div></div>
+          <div class="eyebrow">Capstone Branding Package</div>
+          <div class="title-block">Rock Paper<br>Scissors</div>
+          <div class="rule"></div>
+          <div class="footer-line"><div>High‑Key Portrait &amp; Lifestyle Photography</div><div class="count">20 Images</div></div>
+        </div>
+        <div class="caption"><b>Base — Charcoal / Light Grey</b> — your original scheme. Clean and neutral, no accent color.
+          <div class="swatches"><span class="swatch" style="background:#2b2b2b"></span><span class="swatch" style="background:#e8e8e5"></span></div>
+        </div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide bg-oxblood type-b recommended">
+          <div class="ribbon">Recommended</div>
+          <div class="photo-area"><div class="glow"></div><div class="tag">Photo placeholder</div></div>
+          <div class="eyebrow">Capstone Branding Package</div>
+          <div class="title-block">Rock Paper<br>Scissors</div>
+          <div class="rule"></div>
+          <div class="footer-line"><div>High‑Key Portrait &amp; Lifestyle Photography</div><div class="count">20 Images</div></div>
+        </div>
+        <div class="caption"><b>+ Oxblood Accent</b> — a nod to the classic barber pole and leather chair, without being literal or kitschy. Warms up the grey base and gives you one accent color to repeat in captions or a divider.
+          <div class="swatches"><span class="swatch" style="background:#262322"></span><span class="swatch" style="background:#eee7e5"></span><span class="swatch" style="background:#8f3b35"></span></div>
+        </div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide bg-brass type-b">
+          <div class="photo-area"><div class="glow"></div><div class="tag">Photo placeholder</div></div>
+          <div class="eyebrow">Capstone Branding Package</div>
+          <div class="title-block">Rock Paper<br>Scissors</div>
+          <div class="rule"></div>
+          <div class="footer-line"><div>High‑Key Portrait &amp; Lifestyle Photography</div><div class="count">20 Images</div></div>
+        </div>
+        <div class="caption"><b>+ Brass Accent</b> — reads more upscale/luxury barbering (straight‑razor, brass fixtures). Pairs beautifully with high‑key skin tones and metal clipper highlights in your actual photos.
+          <div class="swatches"><span class="swatch" style="background:#24231f"></span><span class="swatch" style="background:#eeeae1"></span><span class="swatch" style="background:#b08d57"></span></div>
+        </div>
+      </div>
+
+      <div class="slide-card">
+        <div class="slide bg-steel type-b">
+          <div class="photo-area"><div class="glow"></div><div class="tag">Photo placeholder</div></div>
+          <div class="eyebrow">Capstone Branding Package</div>
+          <div class="title-block">Rock Paper<br>Scissors</div>
+          <div class="rule"></div>
+          <div class="footer-line"><div>High‑Key Portrait &amp; Lifestyle Photography</div><div class="count">20 Images</div></div>
+        </div>
+        <div class="caption"><b>+ Steel Blue Accent</b> — the coolest, most modern option. Echoes blade steel and mirrors. Best if you want the deck to feel sleek/editorial rather than warm/traditional.
+          <div class="swatches"><span class="swatch" style="background:#202325"></span><span class="swatch" style="background:#e6ebee"></span><span class="swatch" style="background:#4f7396"></span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <p><b>My pick:</b> Option B typography (Playfair Display italic + Bebas Neue eyebrow) with the oxblood accent — it keeps your dark‑grey base intact, nods to barbershop heritage in one deliberate color rather than a literal red/white/blue palette, and the serif/condensed‑sans mix reads as editorial rather than generic template. Brass is the close second if you want something a touch more "luxury barbering" instead of "vintage."</p>
+  </footer>
+
+</div>
+</body>
+</html>
