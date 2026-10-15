@@ -32,7 +32,7 @@
     var year = new Date().getFullYear();
     return (
       '<p>&copy; ' + year + ' Steve Wort Photography. All rights reserved.</p>' +
-      '<p>Based in the UK &middot; Available for bookings worldwide</p>' +
+      '<p>Based in the Pacific North West &middot; Available for bookings worldwide</p>' +
       '<p class="footer-links">' +
       '<a href="about.html">About</a>' +
       '<a href="contact.html">Contact</a>' +
