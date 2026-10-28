@@ -145,6 +145,7 @@ gallery-item {
   text-transform: uppercase;
   color: #555;
 }
+
 /* Placeholder boxes with no image keep their 4:3 shape */
 div.gallery-item {
   aspect-ratio: 4 / 3;
