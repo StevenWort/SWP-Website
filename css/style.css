@@ -146,7 +146,7 @@ main p {
   color: #555;
 }
 
-/* Placeholder boxes with no image keep their square - 1/1 shape */
+/* Placeholder boxes with no image keep their 1:1 shape */
 div.gallery-item {
   aspect-ratio: 1 / 1;
 }
