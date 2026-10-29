@@ -256,6 +256,7 @@ form.contact-form button:hover {
 
 .site-footer .footer-links a {
   margin: 0 0.5rem;
+  white-space: nowrap;
 }
 
 @media (max-width: 480px) {

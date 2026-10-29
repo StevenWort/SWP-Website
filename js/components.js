@@ -4,6 +4,7 @@
 (function () {
   var NAV_LINKS = [
     { href: 'about.html', label: 'About' },
+    { href: 'https://stevewortphotography.pixieset.com', label: 'Client Galleries', external: true },
     { href: 'contact.html', label: 'Contact' },
     { href: 'portfolio.html', label: 'Portfolio' },
     { href: 'services.html', label: 'Services' }
@@ -14,11 +15,16 @@
     return path === '' ? 'index.html' : path;
   }
 
+  // External links (e.g. Pixieset) open in a new tab so visitors keep the site open.
+  function linkAttrs(link) {
+    return link.external ? ' target="_blank" rel="noopener"' : '';
+  }
+
   function renderHeader() {
     var page = currentPage();
     var navItems = NAV_LINKS.map(function (link) {
       var activeClass = link.href === page ? ' class="active"' : '';
-      return '<li><a href="' + link.href + '"' + activeClass + '>' + link.label + '</a></li>';
+      return '<li><a href="' + link.href + '"' + activeClass + linkAttrs(link) + '>' + link.label + '</a></li>';
     }).join('');
 
     return (
@@ -30,15 +36,14 @@
 
   function renderFooter() {
     var year = new Date().getFullYear();
+    var footerLinks = NAV_LINKS.map(function (link) {
+      return '<a href="' + link.href + '"' + linkAttrs(link) + '>' + link.label + '</a>';
+    }).join('');
+
     return (
       '<p>&copy; ' + year + ' Steve Wort Photography. All rights reserved.</p>' +
       '<p>Based in the Pacific North West &middot; Available for bookings worldwide</p>' +
-      '<p class="footer-links">' +
-      '<a href="about.html">About</a>' +
-      '<a href="contact.html">Contact</a>' +
-      '<a href="portfolio.html">Portfolio</a>' +
-      '<a href="services.html">Services</a>' +
-      '</p>'
+      '<p class="footer-links">' + footerLinks + '</p>'
     );
   }
 
